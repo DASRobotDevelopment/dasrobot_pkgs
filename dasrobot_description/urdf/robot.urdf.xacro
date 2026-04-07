@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<robot name="dasrobot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- Конфигурационные модули -->
+    <xacro:include filename="materials.xacro" />
+    <xacro:include filename="properties.xacro" />
+    <xacro:include filename="inertial_macros.xacro" />
+
+    <!-- Основные модули -->
+    <xacro:include filename="base.xacro" />
+    <xacro:include filename="wheels.xacro" />
+    <xacro:include filename="lidar.xacro" />
+
+    <!-- Подключаемые модули -->
+    <xacro:include filename="gazebo_plugins.xacro" />
+
+</robot>
