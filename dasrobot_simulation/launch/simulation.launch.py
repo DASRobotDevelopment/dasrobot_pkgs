@@ -3,6 +3,7 @@ import xacro
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch_ros.actions import Node
+from launch.conditions import IfCondition 
 from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, PathJoinSubstitution, Command, FindExecutable
@@ -20,6 +21,12 @@ def generate_launch_description():
         'robot_name',
         default_value='dasrobot',
         description='Robot name for the nodes.'
+    )
+
+    use_rviz_arg_declare = DeclareLaunchArgument(
+        'rviz',
+        default_value='true',
+        description='Start RViz'
     )
 
     # Пути к пакетам
@@ -103,13 +110,14 @@ def generate_launch_description():
         name='rviz2',
         arguments=['-d', rviz_config_file_path],
         output='screen',
-        parameters=[{'robot_description': robot_description}] # ?
+        condition=IfCondition(LaunchConfiguration('rviz')),
     )
     
     # Запуск
     ld = LaunchDescription()
 
     ld.add_action(robot_name_arg_declare)
+    ld.add_action(use_rviz_arg_declare)
 
     ld.add_action(robot_state_publisher_node)
     ld.add_action(gazebo_launch)
