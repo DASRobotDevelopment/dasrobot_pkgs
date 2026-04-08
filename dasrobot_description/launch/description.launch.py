@@ -2,17 +2,16 @@ import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch_ros.actions import Node
-from launch.conditions import IfCondition 
 from launch.actions import DeclareLaunchArgument
+from launch.conditions import IfCondition 
 from launch.substitutions import LaunchConfiguration, FindExecutable, Command, PathJoinSubstitution
 
 def generate_launch_description():
     
-    # Параметры запуска
+    # Параметры окружения
     description_pkg_name = 'dasrobot_description'
     description_file_name = 'robot.urdf.xacro'
     rviz2_config_file_name = 'description_config.rviz'
-    
     
     # Аргументы запуска
     view_arg_declare = DeclareLaunchArgument(
@@ -25,13 +24,17 @@ def generate_launch_description():
     description_pkg_path = get_package_share_directory(description_pkg_name)
     
     # Пути к конфигурационным файлам
-    rviz_config_file_path = os.path.join(description_pkg_path, 'config', rviz2_config_file_name)
+    rviz_config_file_path = os.path.join(
+        description_pkg_path,
+        'config',
+        rviz2_config_file_name
+    )
     
     # Описание робота
     robot_description = Command([
-        PathJoinSubstitution([FindExecutable(name="xacro")]),
+        FindExecutable(name="xacro"),
         ' ',
-        PathJoinSubstitution([description_pkg_path, 'urdf', description_file_name])
+        os.path.join(description_pkg_path, 'urdf', description_file_name)
     ])
 
     # Ноды
@@ -65,6 +68,7 @@ def generate_launch_description():
     ld = LaunchDescription()
 
     ld.add_action(view_arg_declare)
+    
     ld.add_action(robot_state_publisher_node)
     ld.add_action(joint_state_publisher_node)
     ld.add_action(rviz_node)
