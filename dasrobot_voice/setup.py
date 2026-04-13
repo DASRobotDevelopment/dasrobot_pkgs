@@ -18,7 +18,7 @@ setup(
     install_requires=['setuptools', 'pyttsx3', 'SpeechRecognition'],
     zip_safe=True,
 
-    maintainer='Dmitry Savin',
+    maintainer='D.A. Savin',
     maintainer_email='das.dev.dt@gmail.com',
     description='Voice processing package for the DASRobot',
     license='Apache-2.0',

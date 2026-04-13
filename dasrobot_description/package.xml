@@ -4,7 +4,7 @@
   <name>dasrobot_description</name>
   <version>0.0.0</version>
   <description>Dasrobot description package</description>
-  <maintainer email="das.dev.dt@gmail.com">Dmitry Savin</maintainer>
+  <maintainer email="das.dev.dt@gmail.com">D.A. Savin</maintainer>
   <license>Apache-2.0</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
