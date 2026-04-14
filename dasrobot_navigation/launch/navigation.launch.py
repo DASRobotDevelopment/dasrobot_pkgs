@@ -156,6 +156,21 @@ def generate_launch_description():
         }]
     )
 
+    explorer_node = Node(
+        package='explore_lite',
+        executable='explore',
+        name='explore_lite',
+        output='screen',
+        parameters=[{
+            'planner_frequency': 1.0,
+            'progress_timeout': 30.0,
+            'protential_scale': 5.0,
+            'orientation_scale': 0.5,
+            'gain_scale': 1.0,
+            'min_frontier_size': 0.5
+        }]
+    )
+
     rviz_node = Node(
         package='rviz2',
         executable='rviz2',
@@ -181,6 +196,7 @@ def generate_launch_description():
     ld.add_action(behavior_server_node)
     ld.add_action(bt_navigator_node)
     ld.add_action(lifecycle_manager_node)
+    # ld.add_action(explorer_node)
     ld.add_action(rviz_node)
 
     return ld
